@@ -30,8 +30,8 @@ const HomePage = () => {
                 Pokedex={
                 <Button 
                 variant={"outlined"} 
-                onClick={() => goToMyPokedex(history)}
                 color={"secondary"} 
+                onClick={() => goToMyPokedex(history)}
                 >Ver minha Pokedex
                 </Button>
             }
