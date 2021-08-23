@@ -5,9 +5,7 @@ import {goToMyPokedex, goToPokemonDetails} from "../../routes/coordinator";
 import { useRequestData } from "../../Hooks/useRequestData";
 import PokemonCard from "../../Components/Cards/PokemonCard";
 import { BASE_URL } from "../../constants/url";
-import { Button } from "@material-ui/core";
 import Header from "../../components/Header/Header";
-import { useHistory } from "react-router-dom";
 
 
 
@@ -45,7 +43,6 @@ const HomePage = () => {
         <Grid container spacing={4} style={{padding:'20px'}}>
            {renderListaPokemon}  
         </Grid>
-
 
 
             <Button variant={"contained"} color={"primary"} onClick={() => goToPokemonDetails(history)}>Detalhes do Pokemon</Button>
