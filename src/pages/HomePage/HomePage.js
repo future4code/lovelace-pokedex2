@@ -2,8 +2,12 @@ import {Button, Grid} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {goToMyPokedex, goToPokemonDetails} from "../../routes/coordinator";
 import { useRequestData } from "../../Hooks/useRequestData";
-import { BASE_URL } from "../../constants/url";
 import PokemonCard from "../../Components/Cards/PokemonCard";
+import { BASE_URL } from "../../constants/url";
+import { Button } from "@material-ui/core";
+import Header from "../../components/Header/Header";
+import { useHistory } from "react-router-dom";
+import { goToMyPokedex, goToPokemonDetails } from "../../routes/coordinator";
 
 
 const HomePage = () => {
@@ -21,15 +25,24 @@ const HomePage = () => {
         
     }) : <p>Carregando...</p>
     return (
-    <>
-        <h1>HomePage</h1>
-        
-        <Grid container spacing={4} style={{padding:'20px'}}>
-            {renderListaPokemon}  
+        <> 
+            <Header
+                Pokedex={
+                <Button 
+                variant={"outlined"} 
+                onClick={() => goToMyPokedex(history)}
+                color={"secondary"} 
+                >Ver minha Pokedex
+                </Button>
+            }
+            />
+            <h1>HomePage</h1>
+            
         </Grid>
-        <Button variant={"contained"} color={"primary"} onClick={() => goToMyPokedex(history)}>Pokedex</Button>
-        <Button variant={"contained"} color={"primary"} onClick={() => goToPokemonDetails(history)}>Detalhes do Pokemon</Button>
-    </>
+            {renderListaPokemon}  
+        <Grid container spacing={4} style={{padding:'20px'}}>
+            <Button variant={"contained"} color={"primary"} onClick={() => goToPokemonDetails(history)}>Detalhes do Pokemon</Button>
+        </>
     )
 }
 
