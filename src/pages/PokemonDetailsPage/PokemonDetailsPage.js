@@ -26,8 +26,8 @@ const PokemonDetailsPage = () => {
 
                 Button2={
                     <Button
-                        color={"secondary"}
                         variant={"outlined"}
+                        color={"secondary"}
                         onClick={() => goToMyPokedex(history)}
                     >Adicionar/Remover da Pokedex
                     </Button>
