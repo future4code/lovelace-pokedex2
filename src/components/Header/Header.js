@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import {Box} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,13 +16,18 @@ const Header = (props) => {
 
     return (
         <>
-            <Box>
-                <AppBar className={classes.root}>
-                    <Toolbar>
-                        {props.Pokedex}
-                    </Toolbar>
-                </AppBar>
-            </Box>
+            <AppBar className={classes.root}>
+                <Toolbar>
+                    {props.Button1}
+
+                    <Typography align='center'>
+                        {props.title}
+                    </Typography>
+
+                    {props.Button2}
+
+                </Toolbar>
+            </AppBar>
         </>
     )
 }

@@ -12,7 +12,27 @@ const PokemonDetailsPage = () => {
 
     return (
         <>
-            <Header/>
+
+            <Header
+                title={'Pokedex'}
+                Button1={
+                    <Button
+                        variant={"outlined"}
+                        color={"secondary"}
+                        onClick={() => history.goBack()}
+                    >Voltar
+                    </Button>
+                }
+
+                Button2={
+                    <Button
+                        color={"secondary"}
+                        variant={"outlined"}
+                        onClick={() => goToMyPokedex(history)}
+                    >Adicionar/Remover da Pokedex
+                    </Button>
+                }
+            />
 
             <Box m={20}>
                 <Grid container p={40}  spacing={2}>
@@ -44,9 +64,6 @@ const PokemonDetailsPage = () => {
                 </Grid>
             </Box>
 
-            <Button variant={"contained"} color={"primary"} onClick={() => history.goBack()}>Voltar</Button>
-            <Button variant={"contained"} color={"primary"} onClick={() => goToMyPokedex(history)}>Adicionar/Remover da
-                Pokedex</Button>
         </>
     )
 }
