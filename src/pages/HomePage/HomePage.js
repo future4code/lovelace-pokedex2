@@ -14,20 +14,13 @@ const HomePage = () => {
 
     const renderListaPokemon = data.results ? data.results.map((pokemon) => {
         return (
-            <Grid item xs={3}>
-                <PokemonCard
-                    name={pokemon.name}
-                    url={pokemon.url}
-                />
-            </Grid>
-        )
-
-        return <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
+         <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
             <PokemonCard
                 name={pokemon.name}
                 url={pokemon.url}
             />
         </Grid>
+        )
 
     }) : <p>Carregando...</p>
     return (
