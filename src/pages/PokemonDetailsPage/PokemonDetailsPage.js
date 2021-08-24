@@ -1,7 +1,7 @@
-import { Button } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import {Button} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 import Header from "../../components/Header/Header";
-import { goToHomePage, goToMyPokedex, goToPokemonDetails } from "../../routes/coordinator";
+import {goToMyPokedex} from "../../routes/coordinator";
 
 
 const PokemonDetailsPage = () => {
@@ -9,7 +9,6 @@ const PokemonDetailsPage = () => {
 
     return (
         <>
-
             <Header
                 title={'Pokedex'}
                 Button1={
@@ -17,28 +16,23 @@ const PokemonDetailsPage = () => {
                         variant={"outlined"}
                         color={"secondary"}
                         onClick={() => history.goBack()}
-                        >Voltar
-                      
+                    >Voltar
                     </Button>
-
                 }
+
                 Button2={
                     <Button
                         variant={"outlined"}
                         color={"secondary"}
                         onClick={() => goToMyPokedex(history)}
-                        >Adicionar/Remover da Pokedex
-                      
+                    >Adicionar/Remover da Pokedex
                     </Button>
-
                 }
-
-                
             />
 
             <h1>PokemonDetailsPage</h1>
 
-            
+
         </>
     )
 }

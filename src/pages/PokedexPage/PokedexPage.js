@@ -2,7 +2,6 @@ import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import { goToHomePage } from "../../routes/coordinator";
-import { goToMyPokedex, goToPokemonDetails } from "../../routes/coordinator";
 
 const PokedexPage = () => {
     const history = useHistory()
@@ -18,8 +17,6 @@ const PokedexPage = () => {
                         onClick={() => goToHomePage(history)}
                     >Voltar para Lista de Pokedex
                     </Button>
-
-
                 }
             />
 
