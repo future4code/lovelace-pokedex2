@@ -3,7 +3,7 @@ import {Button, Grid} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {goToMyPokedex, goToPokemonDetails} from "../../routes/coordinator";
 import { useRequestData } from "../../Hooks/useRequestData";
-import PokemonCard from "../../Components/Cards/PokemonCard";
+import PokemonCard from "../../components/Cards/PokemonCard";
 import { BASE_URL } from "../../constants/url";
 import Header from "../../components/Header/Header";
 
@@ -27,12 +27,13 @@ const HomePage = () => {
     return (
         <> 
             <Header
-                Pokedex={
+                title={'Lista de Pokemons'}
+                Button1={
                 <Button 
-                variant={"outlined"} 
-                color={"secondary"} 
-                onClick={() => goToMyPokedex(history)}
-                >Ver minha Pokedex
+                    variant={"outlined"} 
+                    color={"secondary"} 
+                    onClick={() => goToMyPokedex(history)}
+                    >Ver minha Pokedex
                 </Button>
             }
             />

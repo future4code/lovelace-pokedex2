@@ -19,7 +19,12 @@ const Header = (props) => {
         <>
             <AppBar>
                 <Toolbar>
-                    {props.Pokedex}
+                        {props.Button1}
+                    <Typography align='center'>
+                        {props.title}
+                    </Typography>
+                        {props.Button2}
+                    
                 </Toolbar>
             </AppBar>
         </>
