@@ -62,7 +62,7 @@ export default function PokemonCard(props) {
         </Button>
 
         <Button
-            onClick={() => goToPokemonDetails(history, pokemon)}
+            onClick={() => goToPokemonDetails(history, pokemon.id)}
             variant="outlined"
             size="small"
             color="secondary">

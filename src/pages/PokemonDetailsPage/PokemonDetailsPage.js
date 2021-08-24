@@ -8,7 +8,7 @@ const PokemonDetailsPage = () => {
     const history = useHistory()
     const params = useParams()
 
-    console.log(params.pokemon)
+    console.log(params.pokemonId)
 
     return (
         <>
