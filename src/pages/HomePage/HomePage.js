@@ -1,34 +1,36 @@
 import {Box, Button, Zoom, Grid} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
-import {goToMyPokedex, goToPokemonDetails} from "../../routes/coordinator";
-import {useRequestData} from "../../hooks/useRequestData";
+import {goToMyPokedex} from "../../routes/coordinator";
 import PokemonCard from "../../components/PokemonCard/PokemonCard";
-import {BASE_URL} from "../../constants/url";
 import Header from "../../components/Header/Header";
+
+import GlobalContext from "../../global/GlobalContext";
+import {useContext} from "react";
 
 
 const HomePage = () => {
     const history = useHistory()
-    const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=20`)
+    const {states} = useContext(GlobalContext);
 
-
-    const renderListaPokemon = data.results ? data.results.map((pokemon) => {
+    const renderListaPokemon = states.listPokemon ? states.listPokemon.map((pokemon) => {
         return (
             <Zoom in style={{transitionDelay: pokemon ? '500ms' : '0ms'}}>
-                <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
+                <Grid item lg={3} md={3} sm={6} xs={12}>
                     <PokemonCard
+                        key={pokemon.name}
                         name={pokemon.name}
                         url={pokemon.url}
+                        screen='HomePage'
                     />
                 </Grid>
             </Zoom>
         )
-
     }) : <p>Carregando...</p>
     return (
         <>
             <Box m={10}>
                 <Header
+                    title={'Lista de Pokemons'}
                     Button1={
                         <Button
                             variant={"outlined"}
@@ -43,10 +45,6 @@ const HomePage = () => {
             <Grid container spacing={4}>
                 {renderListaPokemon}
             </Grid>
-
-
-            <Button variant={"contained"} color={"primary"} onClick={() => goToPokemonDetails(history)}>Detalhes do
-                Pokemon</Button>
         </>
     )
 }
