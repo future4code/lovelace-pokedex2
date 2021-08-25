@@ -1,20 +1,29 @@
-import React, { useContext } from 'react';
-
-//Styles
-import { Button } from "@material-ui/core";
-
-//Components
+import {Button, Grid} from "@material-ui/core";
+import {useContext} from "react";
+import {useHistory} from "react-router-dom";
 import Header from "../../components/Header/Header";
-import { goToHomePage } from "../../routes/coordinator";
-import { useHistory } from "react-router-dom";
+import {goToHomePage} from "../../routes/coordinator";
+import GlobalContext from "../../global/GlobalContext";
+import PokemonCard from "../../components/Cards/PokemonCard";
 
-//Context
-import { PokemonListContext } from '../../context/ContextPokemonList';
 
 const PokedexPage = () => {
     const history = useHistory()
-    const pokemonList = useContext(PokemonListContext)
-    console.log('lista', pokemonList)
+    const {states, setters, requests} = useContext(GlobalContext);
+
+    const renderListaPokedex = states.listPokedex ? states.listPokedex.map((pokemon) => {
+        return (
+            <Grid item xs={3}>
+                <PokemonCard
+                    key={pokemon.name}
+                    name={pokemon.name}
+                    url={pokemon.url}
+                    screen='Pokedex'
+                />
+            </Grid>
+        )
+    }) : <p>Carregando...</p>
+
     return (
         <>
             <Header
@@ -29,6 +38,10 @@ const PokedexPage = () => {
                 }
             />
         </>
+
+    <Grid container spacing={4} style={{padding:'20px'}}>
+        {renderListaPokedex}
+    </Grid>
     )
 }
 
