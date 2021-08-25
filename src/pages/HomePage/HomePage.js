@@ -1,14 +1,12 @@
-
 import {Button, Grid} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {goToMyPokedex, goToPokemonDetails} from "../../routes/coordinator";
-import { useRequestData } from "../../hooks/useRequestData";
+import {useRequestData} from "../../hooks/useRequestData";
 import PokemonCard from "../../components/Cards/PokemonCard";
-import { BASE_URL } from "../../constants/url";
+import {BASE_URL} from "../../constants/url";
 import Header from "../../components/Header/Header";
-import { useState } from "react";
-import { PokemonListContext } from "../../context/ContextPokemonList";
-
+import {useState} from "react";
+import {PokemonListContext} from "../../context/ContextPokemonList";
 
 
 const HomePage = () => {
@@ -22,41 +20,43 @@ const HomePage = () => {
         novaLista.push(pok)
         setPokemonList(novaLista)
         console.log('lista', pokemonList)
-      }
+    }
 
     const renderListaPokemon = data.results ? data.results.map((pokemon) => {
+        return (
+            <Grid item xs={3}>
+                <PokemonCard
+                    name={pokemon.name}
+                    url={pokemon.url}
+                    addPokemon={addPokemon}
+                />
+            </Grid>
+        )
 
-        return <Grid item xs={3} >
-            <PokemonCard 
-                name={pokemon.name}
-                url={pokemon.url}
-                addPokemon={addPokemon}
-            />
-        </Grid>
-        
     }) : <p>Carregando...</p>
     return (
-        <PokemonListContext.Provider value={pokemonList}> 
+        <PokemonListContext.Provider value={pokemonList}>
             <Header
-                Pokedex={
-                <Button 
-                    variant={"outlined"} 
-                    color={"secondary"} 
-                    onClick={() => goToMyPokedex(history)}
-                >Ver minha Pokedex
-                </Button>
-            }
+                title={'Lista de Pokemons'}
+                Button1={
+                    <Button
+                        variant={"outlined"}
+                        color={"secondary"}
+                        onClick={() => goToMyPokedex(history)}
+                    >Ver minha Pokedex
+                    </Button>
+                }
             />
             <h1>HomePage</h1>
-            
-      
-           
-        <Grid container spacing={4} style={{padding:'20px'}}>
-           {renderListaPokemon}  
-        </Grid>
 
 
-            <Button variant={"contained"} color={"primary"} onClick={() => goToPokemonDetails(history)}>Detalhes do Pokemon</Button>
+            <Grid container spacing={4} style={{padding: '20px'}}>
+                {renderListaPokemon}
+            </Grid>
+
+
+            <Button variant={"contained"} color={"primary"} onClick={() => goToPokemonDetails(history)}>Detalhes do
+                Pokemon</Button>
         </PokemonListContext.Provider>
     )
 }

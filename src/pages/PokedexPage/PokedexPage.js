@@ -1,9 +1,14 @@
-import {Button} from "@material-ui/core";
-import {useHistory} from "react-router-dom";
-import Header from "../../components/Header/Header";
-import {goToHomePage} from "../../routes/coordinator";
-
 import React, { useContext } from 'react';
+
+//Styles
+import { Button } from "@material-ui/core";
+
+//Components
+import Header from "../../components/Header/Header";
+import { goToHomePage } from "../../routes/coordinator";
+import { useHistory } from "react-router-dom";
+
+//Context
 import { PokemonListContext } from '../../context/ContextPokemonList';
 
 const PokedexPage = () => {
@@ -12,9 +17,17 @@ const PokedexPage = () => {
     console.log('lista', pokemonList)
     return (
         <>
-            <Header/>
-            <h1>PokedexPage</h1>
-            <Button variant={"contained"} color={"primary"} onClick={() => goToHomePage(history)}>Voltar para lista de pokemons</Button>
+            <Header
+                title={'Lista de Pokemon'}
+                Button1={
+                    <Button
+                        variant={"outlined"}
+                        color={"secondary"}
+                        onClick={() => goToHomePage(history)}
+                    >Voltar para Lista de Pokedex
+                    </Button>
+                }
+            />
         </>
     )
 }

@@ -9,10 +9,30 @@ const PokemonDetailsPage = () => {
 
     return (
         <>
-            <Header/>
+            <Header
+                title={'Pokedex'}
+                Button1={
+                    <Button
+                        variant={"outlined"}
+                        color={"secondary"}
+                        onClick={() => history.goBack()}
+                    >Voltar
+                    </Button>
+                }
+
+                Button2={
+                    <Button
+                        variant={"outlined"}
+                        color={"secondary"}
+                        onClick={() => goToMyPokedex(history)}
+                    >Adicionar/Remover da Pokedex
+                    </Button>
+                }
+            />
+
             <h1>PokemonDetailsPage</h1>
-            <Button variant={"contained"} color={"primary"} onClick={() => history.goBack()}>Voltar</Button>
-            <Button variant={"contained"} color={"primary"} onClick={() => goToMyPokedex(history)}>Adicionar/Remover da Pokedex</Button>
+
+
         </>
     )
 }
