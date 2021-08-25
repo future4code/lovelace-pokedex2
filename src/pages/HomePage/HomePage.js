@@ -1,4 +1,4 @@
-import {Box, Button, Grid} from "@material-ui/core";
+import {Box, Button, Zoom, Grid} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {goToMyPokedex, goToPokemonDetails} from "../../routes/coordinator";
 import {useRequestData} from "../../hooks/useRequestData";
@@ -14,12 +14,14 @@ const HomePage = () => {
 
     const renderListaPokemon = data.results ? data.results.map((pokemon) => {
         return (
-         <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
-            <PokemonCard
-                name={pokemon.name}
-                url={pokemon.url}
-            />
-        </Grid>
+            <Zoom in style={{transitionDelay: pokemon ? '500ms' : '0ms'}}>
+                <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
+                    <PokemonCard
+                        name={pokemon.name}
+                        url={pokemon.url}
+                    />
+                </Grid>
+            </Zoom>
         )
 
     }) : <p>Carregando...</p>
