@@ -5,28 +5,40 @@ import {useRequestData} from "../../hooks/useRequestData";
 import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import {BASE_URL} from "../../constants/url";
 import Header from "../../components/Header/Header";
+import {useState} from "react";
+import {PokemonListContext} from "../../context/ContextPokemonList";
 
 
 const HomePage = () => {
     const history = useHistory()
     const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=20`)
+    const [pokemonList, setPokemonList] = useState([])
 
+    const addPokemon = (pok) => {
+        console.log('pokemon', pok)
+        const novaLista = [...pokemonList]
+        novaLista.push(pok)
+        setPokemonList(novaLista)
+        console.log('lista', pokemonList)
+    }
 
     const renderListaPokemon = data.results ? data.results.map((pokemon) => {
         return (
-         <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
-            <PokemonCard
-                name={pokemon.name}
-                url={pokemon.url}
-            />
-        </Grid>
+            <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
+                <PokemonCard
+                    name={pokemon.name}
+                    url={pokemon.url}
+                    addPokemon={addPokemon}
+                />
+            </Grid>
         )
 
     }) : <p>Carregando...</p>
     return (
-        <>
-            <Box m={10}>
+        <PokemonListContext.Provider value={pokemonList}>
+            < Box m={10}>
                 <Header
+                    title={'Lista de Pokemons'}
                     Button1={
                         <Button
                             variant={"outlined"}
@@ -45,7 +57,7 @@ const HomePage = () => {
 
             <Button variant={"contained"} color={"primary"} onClick={() => goToPokemonDetails(history)}>Detalhes do
                 Pokemon</Button>
-        </>
+        </PokemonListContext.Provider>
     )
 }
 

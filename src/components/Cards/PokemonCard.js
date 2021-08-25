@@ -2,7 +2,7 @@ import React from 'react';
 import {useHistory} from "react-router-dom";
 
 //Styles
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,64 +12,65 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 // Requests
-import { useRequestData } from "../../Hooks/useRequestData";
+import {useRequestData} from "../../hooks/useRequestData";
 import {goToPokemonDetails} from "../../routes/coordinator";
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
+    root: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 140,
+    },
 });
 
 export default function PokemonCard(props) {
-  const classes = useStyles();
-  const history = useHistory()
-  const [pokemon]  = useRequestData({}, props.url)
+    const classes = useStyles();
+    const history = useHistory()
+    const [pokemon] = useRequestData({}, props.url)
 
 
-  return (
-    <>
-    {pokemon.sprites &&
-    <Card className={classes.root}>
-      <CardActionArea>
+    return (
+        <>
+            {pokemon.sprites &&
+            <Card className={classes.root}>
+                <CardActionArea>
 
-        <CardMedia
-          className={classes.media}
-          image={pokemon.sprites.front_default}
-          title={props.name}
-          style={{maxWidth: '150px', maxHeight:'100%', margin:'0 auto'}}
-        />
+                    <CardMedia
+                        className={classes.media}
+                        image={pokemon.sprites.front_default}
+                        title={props.name}
+                        style={{maxWidth: '150px', maxHeight: '100%', margin: '0 auto'}}
+                    />
 
-        <CardContent style={{textAlign:'center'}}>
+                    <CardContent style={{textAlign: 'center'}}>
 
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.name}
-          </Typography>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {props.name}
+                        </Typography>
 
-        </CardContent>
-      </CardActionArea>
+                    </CardContent>
+                </CardActionArea>
 
-      <CardActions style={{justifyContent: 'center'}}>
+                <CardActions style={{justifyContent: 'center'}}>
 
-        <Button
-            variant="outlined"
-            size="small"
-            color="primary">
-            Adicionar
-        </Button>
+                    <Button
+                        onClick={() => props.addPokemon(pokemon)}
+                        variant="outlined"
+                        size="small"
+                        color="primary">
+                        Adicionar
+                    </Button>
 
-        <Button
-            onClick={() => goToPokemonDetails(history, pokemon.id)}
-            variant="outlined"
-            size="small"
-            color="secondary">
-            Detalhes
-        </Button>
-      </CardActions>
-    </Card>}
-    </>
-  );
+                    <Button
+                        onClick={() => goToPokemonDetails(history, pokemon.id)}
+                        variant="outlined"
+                        size="small"
+                        color="secondary">
+                        Detalhes
+                    </Button>
+                </CardActions>
+            </Card>}
+        </>
+    );
 }

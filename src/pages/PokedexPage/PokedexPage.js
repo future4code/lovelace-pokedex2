@@ -1,11 +1,20 @@
+import React, { useContext } from 'react';
+
+//Styles
 import { Button } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+
+//Components
 import Header from "../../components/Header/Header";
 import { goToHomePage } from "../../routes/coordinator";
+import { useHistory } from "react-router-dom";
+
+//Context
+import { PokemonListContext } from '../../context/ContextPokemonList';
 
 const PokedexPage = () => {
     const history = useHistory()
-
+    const pokemonList = useContext(PokemonListContext)
+    console.log('lista', pokemonList)
     return (
         <>
             <Header
@@ -19,9 +28,7 @@ const PokedexPage = () => {
                     </Button>
                 }
             />
-
         </>
-
     )
 }
 
