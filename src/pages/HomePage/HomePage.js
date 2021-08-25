@@ -14,10 +14,9 @@ const HomePage = () => {
 
     const renderListaPokemon = states.listPokemon ? states.listPokemon.map((pokemon) => {
         return (
-            <Zoom in style={{transitionDelay: pokemon ? '500ms' : '0ms'}}>
+            <Zoom key={pokemon.name} in style={{transitionDelay: pokemon ? '500ms' : '0ms'}}>
                 <Grid item lg={3} md={3} sm={6} xs={12}>
                     <PokemonCard
-                        key={pokemon.name}
                         name={pokemon.name}
                         url={pokemon.url}
                         screen='HomePage'

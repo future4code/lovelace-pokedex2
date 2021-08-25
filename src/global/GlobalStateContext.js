@@ -1,25 +1,21 @@
-
-import { CancelPresentationOutlined } from "@material-ui/icons";
-import { useEffect, useState } from "react";
-import { BASE_URL } from "../constants/url";
-import { useRequestData } from "../Hooks/useRequestData";
+import {useEffect, useState} from "react";
+import {BASE_URL} from "../constants/url";
+import {useRequestData} from "../hooks/useRequestData";
 import GlobalContext from "./GlobalContext";
 
 
 const GlobalStateContext = (props) => {
-    
-    
     const [listPokemon, setListPokemon] = useState([])  // name, url_pokemon
     const [listPokedex, setListPokedex] = useState([])  // name, url_front_default
     const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=20`)
 
-    useEffect(() => { 
+    useEffect(() => {
         setListPokemon(data.results)
     }, [data])
-    
+
     const addPokemon = (pokemonName, pokemonUrl) => {  // name, url_pokemon
         const pokemon = {
-            name : pokemonName,
+            name: pokemonName,
             url: pokemonUrl
         }
         // adicionando a lista pokedex
@@ -35,7 +31,7 @@ const GlobalStateContext = (props) => {
 
     const removePokemon = (pokemonName, pokemonUrl) => {  // name, url_pokemon
         const pokemon = {
-            name : pokemonName,
+            name: pokemonName,
             url: pokemonUrl
         }
         // adicionando na lista da pokemon
@@ -51,11 +47,11 @@ const GlobalStateContext = (props) => {
 
 
     const states = {listPokemon, listPokedex};
-    const setters = { addPokemon, removePokemon };
+    const setters = {addPokemon, removePokemon};
     const requests = {};
 
     return (
-        <GlobalContext.Provider value={{ states, setters, requests }}>
+        <GlobalContext.Provider value={{states, setters, requests}}>
             {props.children}
         </GlobalContext.Provider>
     )
