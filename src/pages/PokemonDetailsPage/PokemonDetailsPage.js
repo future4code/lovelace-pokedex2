@@ -15,8 +15,6 @@ import {BASE_URL} from "../../constants/url";
 const useStyles = makeStyles((theme) => ({
     center: {
         position: "fixed",
-        top: 0,
-        bottom: 0,
         left: 0,
         right: 0
     },
@@ -42,7 +40,8 @@ const PokemonDetailsPage = () => {
     return (
         <>
             <Header
-                title={'Pokedex'}
+                title={pokemon.name}
+                display={"space"}
                 Button1={
                     <Button
                         variant={"outlined"}
@@ -62,7 +61,7 @@ const PokemonDetailsPage = () => {
                 }
             />
 
-            <Box m={20} className={classes.center}>
+            <Box m={15} mt={10} className={classes.center}>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <Box m={1} style={{border: "1px solid #000", background: "#CCC"}} display={"flex"}

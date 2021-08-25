@@ -1,10 +1,10 @@
-import {Button, Grid} from "@material-ui/core";
+import {Box, Button, Grid} from "@material-ui/core";
 import {useContext} from "react";
 import {useHistory} from "react-router-dom";
 import Header from "../../components/Header/Header";
 import {goToHomePage} from "../../routes/coordinator";
 import GlobalContext from "../../global/GlobalContext";
-import PokemonCard from "../../components/Cards/PokemonCard";
+import PokemonCard from "../../components/PokemonCard/PokemonCard";
 
 
 const PokedexPage = () => {
@@ -37,9 +37,11 @@ const PokedexPage = () => {
                 }
             />
 
+            <Box m={15}>
             <Grid container spacing={4} style={{padding:'20px'}}>
                 {renderListaPokedex}
             </Grid>
+            </Box>
         </>
     )
 }
