@@ -1,8 +1,8 @@
-import {Button, Grid} from "@material-ui/core";
+import {Box, Button, Grid} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {goToMyPokedex, goToPokemonDetails} from "../../routes/coordinator";
 import {useRequestData} from "../../hooks/useRequestData";
-import PokemonCard from "../../components/Cards/PokemonCard";
+import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import {BASE_URL} from "../../constants/url";
 import Header from "../../components/Header/Header";
 import {useState} from "react";
@@ -24,7 +24,7 @@ const HomePage = () => {
 
     const renderListaPokemon = data.results ? data.results.map((pokemon) => {
         return (
-            <Grid item xs={3}>
+            <Grid key={pokemon.name} item lg={3} md={3} sm={6} xs={12}>
                 <PokemonCard
                     name={pokemon.name}
                     url={pokemon.url}
@@ -36,21 +36,21 @@ const HomePage = () => {
     }) : <p>Carregando...</p>
     return (
         <PokemonListContext.Provider value={pokemonList}>
-            <Header
-                title={'Lista de Pokemons'}
-                Button1={
-                    <Button
-                        variant={"outlined"}
-                        color={"secondary"}
-                        onClick={() => goToMyPokedex(history)}
-                    >Ver minha Pokedex
-                    </Button>
-                }
-            />
-            <h1>HomePage</h1>
+            < Box m={10}>
+                <Header
+                    title={'Lista de Pokemons'}
+                    Button1={
+                        <Button
+                            variant={"outlined"}
+                            color={"secondary"}
+                            onClick={() => goToMyPokedex(history)}
+                        >Ver minha Pokedex
+                        </Button>
+                    }
+                />
+            </Box>
 
-
-            <Grid container spacing={4} style={{padding: '20px'}}>
+            <Grid container spacing={4}>
                 {renderListaPokemon}
             </Grid>
 

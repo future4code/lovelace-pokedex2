@@ -1,14 +1,13 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import {Typography} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'fixed',
-        bottom: theme.spacing(2),
-        right: theme.spacing(2),
+        top: 0,
     },
 }));
 
@@ -17,7 +16,7 @@ const Header = (props) => {
 
     return (
         <>
-            <AppBar>
+            <AppBar className={classes.root}>
                 <Toolbar>
                     {props.Button1}
 
