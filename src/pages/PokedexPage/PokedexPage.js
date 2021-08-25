@@ -3,10 +3,13 @@ import {useHistory} from "react-router-dom";
 import Header from "../../components/Header/Header";
 import {goToHomePage} from "../../routes/coordinator";
 
+import React, { useContext } from 'react';
+import { PokemonListContext } from '../../context/ContextPokemonList';
 
 const PokedexPage = () => {
     const history = useHistory()
-
+    const pokemonList = useContext(PokemonListContext)
+    console.log('lista', pokemonList)
     return (
         <>
             <Header/>

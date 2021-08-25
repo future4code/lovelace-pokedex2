@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { useRequestData } from "../../Hooks/useRequestData";
+import { useRequestData } from "../../hooks/useRequestData";
+
+
 
 const useStyles = makeStyles({
   root: {
@@ -21,7 +23,12 @@ const useStyles = makeStyles({
 export default function PokemonCard(props) {
   const classes = useStyles();
   const [pokemon]  = useRequestData({}, props.url)
-    // console.log('detalhe', pokemon.sprites.front_default)
+  
+  // 
+
+  
+    // console.log('detalhe', pokemon)
+    
   return (
     <>
     {pokemon.sprites &&
@@ -40,7 +47,7 @@ export default function PokemonCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions style={{justifyContent: 'center'}}>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={() => props.addPokemon(pokemon)}>
             Adicionar
         </Button>
         <Button size="small" color="primary">
