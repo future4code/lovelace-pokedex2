@@ -9,13 +9,12 @@ import PokemonCard from "../../components/Cards/PokemonCard";
 
 const PokedexPage = () => {
     const history = useHistory()
-    const {states, setters, requests} = useContext(GlobalContext);
+    const {states} = useContext(GlobalContext);
 
     const renderListaPokedex = states.listPokedex ? states.listPokedex.map((pokemon) => {
         return (
-            <Grid item xs={3}>
+            <Grid key={pokemon.name} item xs={3}>
                 <PokemonCard
-                    key={pokemon.name}
                     name={pokemon.name}
                     url={pokemon.url}
                     screen='Pokedex'
@@ -37,11 +36,11 @@ const PokedexPage = () => {
                     </Button>
                 }
             />
-        </>
 
-    <Grid container spacing={4} style={{padding:'20px'}}>
-        {renderListaPokedex}
-    </Grid>
+            <Grid container spacing={4} style={{padding:'20px'}}>
+                {renderListaPokedex}
+            </Grid>
+        </>
     )
 }
 
