@@ -1,4 +1,7 @@
 import React, {useContext} from 'react';
+import {useHistory} from "react-router-dom";
+
+//Styles
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,10 +10,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {useRequestData} from "../../Hooks/useRequestData";
-import GlobalContext from '../../global/GlobalContext';
-import {useLocation} from 'react-router-dom';
+import {Divider} from "@material-ui/core";
+
+// Requests
+import {useRequestData} from "../../hooks/useRequestData";
 import {goToPokemonDetails} from "../../routes/coordinator";
+import GlobalContext from '../../global/GlobalContext';
+
 
 const useStyles = makeStyles({
     root: {
@@ -25,7 +31,7 @@ export default function PokemonCard(props) {
     const classes = useStyles();
     const history = useHistory()
     const [pokemon] = useRequestData({}, props.url)
-    const {states, setters, requets} = useContext(GlobalContext)
+    const {setters} = useContext(GlobalContext)
 
 
     return (
@@ -67,6 +73,9 @@ export default function PokemonCard(props) {
                                 Remover
                             </Button>
                     }
+
+                    <Divider orientation={"vertical"} flexItem/>
+
                     <Button
                         onClick={() => goToPokemonDetails(history, pokemon.id)}
                         variant="outlined"

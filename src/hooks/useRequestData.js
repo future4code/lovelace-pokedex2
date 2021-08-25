@@ -11,6 +11,7 @@ export const useRequestData = (initialValue, url) => {
             })
             .catch((err) => {
                 alert("Erro ao acessar endpoint, tente novamente");
+                console.log(err)
             });
     }, [url]);
     return [data, setData]
