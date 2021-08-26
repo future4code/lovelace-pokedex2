@@ -32,7 +32,7 @@ const Header = (props) => {
         <>
             <AppBar className={classes.root}>
                 <Toolbar>
-                    <Box className={props.display === "space" ? classes.header100: classes.header50 }>
+                    <Box className={props.display === "space" ? classes.header100 : classes.header50}>
                         {props.Button1}
 
                         <Typography variant={"body1"}>
