@@ -42,7 +42,8 @@ const PokemonDetailsPage = () => {
     return (
         <>
             <Header
-                title={'Pokedex'}
+                title={pokemon.name}
+                display={"space"}
                 Button1={
                     <Button
                         variant={"outlined"}
