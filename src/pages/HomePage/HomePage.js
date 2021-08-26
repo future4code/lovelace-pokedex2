@@ -32,6 +32,8 @@ const HomePage = () => {
                 <CircularProgress color="secondary"/>
             </Box>
         )
+
+
     return (
         <>
             <Box m={10}>
