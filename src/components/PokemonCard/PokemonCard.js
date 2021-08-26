@@ -77,7 +77,7 @@ export default function PokemonCard(props) {
                     <Divider orientation={"vertical"} flexItem/>
 
                     <Button
-                        onClick={() => goToPokemonDetails(history, pokemon.id)}
+                        onClick={() => goToPokemonDetails(history, props.name)}
                         variant="outlined"
                         size="small"
                         color="secondary">

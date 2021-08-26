@@ -16,7 +16,7 @@ const Router = () => {
                     <PokedexPage/>
                 </Route>
 
-                <Route exact path={"/pokemon/:pokemonId"}>
+                <Route exact path={"/pokemon/:pokemonName"}>
                     <PokemonDetailsPage/>
                 </Route>
 

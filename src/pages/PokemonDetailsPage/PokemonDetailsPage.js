@@ -11,6 +11,9 @@ import Header from "../../components/Header/Header";
 import {goToMyPokedex} from "../../routes/coordinator";
 import {useRequestData} from "../../hooks/useRequestData";
 import {BASE_URL} from "../../constants/url";
+import React, {useContext, useState} from "react";
+import GlobalContext from "../../global/GlobalContext";
+
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -35,8 +38,10 @@ const useStyles = makeStyles((theme) => ({
 const PokemonDetailsPage = () => {
     const history = useHistory()
     const params = useParams()
-    const [pokemon] = useRequestData({}, `${BASE_URL}/${params.pokemonId}`)
+    const [pokemon] = useRequestData({}, `${BASE_URL}/${params.pokemonName}`)
     const classes = useStyles();
+    const {states, setters} = useContext(GlobalContext)
+    const [pokemonPokedex, setPokemonPokedex] = useState([])
 
     const stats = pokemon && pokemon.stats
     const types = pokemon && pokemon.types && pokemon.types.map((type) => {
@@ -51,13 +56,25 @@ const PokemonDetailsPage = () => {
 
     const moves = pokemon && pokemon.moves && pokemon.moves.slice(0, 10).map((move) => {
         return (
-            <ul>
+            <ul key={move.move.name}>
                 <li>{move.move.name}</li>
             </ul>
         )
     })
 
+    const beOnPokedex = pokemon && pokemon.name && states.listPokedex.filter((poke) => {
+        if (poke.name === pokemon.name) {
+            console.log("estar na pokedex", poke)
+            // setPokemonPokedex(poke)
 
+        } else {
+            console.log("não estar na pokedex")
+        }
+    })
+
+    // const addButton =  <Button variant={"outlined"} color={"secondary"} onClick={() => goToMyPokedex(history)}>Adicionar na minha Pokedex</Button>
+
+    console.log(beOnPokedex)
     return (
         <>
             <Header
@@ -73,13 +90,30 @@ const PokemonDetailsPage = () => {
                 }
 
                 Button2={
-                    <Button
-                        variant={"outlined"}
-                        color={"secondary"}
-                        onClick={() => goToMyPokedex(history)}
-                    >Adicionar/Remover da Pokedex
-                    </Button>
+                    beOnPokedex && beOnPokedex.length > 0
+                        ? <Button
+                            variant={"outlined"}
+                            color={"secondary"}
+                            onClick={() => setters.removePokemon(beOnPokedex.name, beOnPokedex.url)}
+                        >Remover da Pokedex
+                        </Button>
+                        : ""
+                        // <Button
+                        //     variant={"outlined"}
+                        //     color={"secondary"}
+                        //     // onClick={() => setters.removePokemon(pokemon.name)}
+                        // >Adicionar na Pokedex
+                        // </Button>
+
+                    // <Button
+                    // variant={"outlined"}
+                    // color={"secondary"}
+                    // // onClick={() => setters.addPokemon(pokemon.name)}
+                    // >Adicionar na Pokedex
+                    // </Button>
                 }
+
+
             />
 
             <Box className={classes.container}>
@@ -242,10 +276,7 @@ const PokemonDetailsPage = () => {
 
 
                                 <Box mt={1}>
-
-                                    <Typography>
-                                        {moves}
-                                    </Typography>
+                                    {moves}
                                 </Box>
                             </Box>
                         </Grow>

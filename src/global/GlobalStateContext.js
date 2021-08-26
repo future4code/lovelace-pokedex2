@@ -45,6 +45,32 @@ const GlobalStateContext = (props) => {
         setListPokedex(newListPokedex)
     }
 
+    // const isPokedex = (pokemonName) => {
+    //     const ispokemon = listPokedex.find((pokemon) => {
+    //         if (pokemon.name === pokemonName){
+    //             setUrlPokemon(pokemon.url)
+    //             return true
+    //         } else {
+    //             return false
+    //         }
+    //     })
+    //
+    //     // console.log(ispokemon)
+    //
+    //     if (ispokemon) {
+    //         // console.log("estar a lista pokedex", ispokemon)
+    //         setbeOnPokedex(true)
+    //
+    //         // addPokemon(ispokemon.name, ispokemon.url)
+    //     } else {
+    //         // console.log("não estar a lista pokedex", ispokemon)
+    //
+    //         setbeOnPokedex(false)
+    //
+    //         // removePokemon(ispokemon.name, ispokemon.url)
+    //     }
+    // }
+
 
     const states = {listPokemon, listPokedex};
     const setters = {addPokemon, removePokemon};
