@@ -9,6 +9,7 @@ import GlobalContext from "../../global/GlobalContext";
 import {useContext} from "react";
 
 
+
 const HomePage = () => {
     const history = useHistory()
     const {states} = useContext(GlobalContext);

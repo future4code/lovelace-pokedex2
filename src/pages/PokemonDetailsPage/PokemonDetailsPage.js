@@ -12,6 +12,9 @@ import {goToMyPokedex} from "../../routes/coordinator";
 import {useRequestData} from "../../hooks/useRequestData";
 import {BASE_URL} from "../../constants/url";
 
+import {useContext} from "react";
+import GlobalContext from "../../global/GlobalContext";
+
 const useStyles = makeStyles((theme) => ({
     container: {
         flexGrow: 1,
@@ -37,6 +40,7 @@ const PokemonDetailsPage = () => {
     const params = useParams()
     const [pokemon] = useRequestData({}, `${BASE_URL}/${params.pokemonId}`)
     const classes = useStyles();
+    const {setters} = useContext(GlobalContext);
 
     const stats = pokemon && pokemon.stats
     const types = pokemon && pokemon.types && pokemon.types.map((type) => {
@@ -77,6 +81,7 @@ const PokemonDetailsPage = () => {
                         variant={"outlined"}
                         color={"secondary"}
                         onClick={() => goToMyPokedex(history)}
+                        // onClick={() => setters.AddRemovePokedex(pokemon.name)}
                     >Adicionar/Remover da Pokedex
                     </Button>
                 }
