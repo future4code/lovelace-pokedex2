@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import {Typography} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -9,6 +9,20 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         top: 0,
     },
+    header100: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        textTransform: "uppercase",
+        width: "100%"
+    },
+    header50: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        textTransform: "uppercase",
+        width: "50%"
+    }
 }));
 
 const Header = (props) => {
@@ -18,14 +32,15 @@ const Header = (props) => {
         <>
             <AppBar className={classes.root}>
                 <Toolbar>
-                    {props.Button1}
+                    <Box className={props.display === "space" ? classes.header100: classes.header50 }>
+                        {props.Button1}
 
-                    <Typography align='center'>
-                        {props.title}
-                    </Typography>
+                        <Typography variant={"body1"}>
+                            {props.title}
+                        </Typography>
 
-                    {props.Button2}
-
+                        {props.Button2}
+                    </Box>
                 </Toolbar>
             </AppBar>
         </>
