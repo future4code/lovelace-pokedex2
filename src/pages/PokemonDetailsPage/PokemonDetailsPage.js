@@ -10,6 +10,7 @@ import Header from "../../components/Header/Header";
 //Requests
 import {useRequestData} from "../../hooks/useRequestData";
 import {BASE_URL} from "../../constants/url";
+
 import React, {useContext} from "react";
 import GlobalContext from "../../global/GlobalContext";
 

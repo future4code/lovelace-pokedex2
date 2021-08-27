@@ -10,7 +10,17 @@ const GlobalStateContext = (props) => {
     const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=20`)
 
     useEffect(() => {
-        setListPokemon(data.results)
+        const listaLSStr = localStorage.getItem("listaPokemon")
+
+        if ((listaLSStr !== '') & (listaLSStr !== null)) {
+            const listaLSObj = JSON.parse(listaLSStr)
+            setListPokemon(listaLSObj)
+        } else {
+            console.log('listaRW')
+            setListPokemon(data.results)
+            localStorage.setItem("listaPokemon", JSON.stringify(data.results))
+        }
+
     }, [data])
 
     const addPokemon = (pokemonName, pokemonUrl) => {  // name, url_pokemon
