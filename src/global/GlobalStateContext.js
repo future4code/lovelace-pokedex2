@@ -55,7 +55,6 @@ const GlobalStateContext = (props) => {
 
     const onChangePage = (event, value) => {
         setPage(value)
-        console.log(value)
     }
 
     const states = {listPokemon, listPokedex, page};

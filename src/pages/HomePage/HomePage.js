@@ -50,13 +50,7 @@ const HomePage = () => {
                         </Button>
                     }
                 />
-
-                <Box mt={5} style={{width: "100%", display: "flex", justifyContent: "center"}}>
-                    <Pagination count={50}  variant="outlined" color="secondary" onChange={setters.onChangePage}/>
-                </Box>
             </Box>
-
-
 
             <Box m={15}>
                 <Grid container spacing={4}>
@@ -67,8 +61,6 @@ const HomePage = () => {
                     <Pagination count={50}  variant="outlined" color="secondary" onChange={setters.onChangePage}/>
                 </Box>
             </Box>
-
-
         </>
     )
 }
