@@ -61,7 +61,7 @@ const PokemonDetailsPage = () => {
         )
     })
 
-    const beOnPokedex = states.listPokedex && states.listPokedex.find((poke) => {
+    const beOnPokedex = states.listPokedex && states.listPokedex.find((poke ) => {
         return poke.name === pokemon.name;
     })
 

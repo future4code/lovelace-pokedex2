@@ -7,20 +7,12 @@ import GlobalContext from "./GlobalContext";
 const GlobalStateContext = (props) => {
     const [listPokemon, setListPokemon] = useState([])  // name, url_pokemon
     const [listPokedex, setListPokedex] = useState([])  // name, url_front_default
-    const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=20`)
+    const [page, setPage] = useState(1)
+    const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=${(page - 1) * 20}`)
+
 
     useEffect(() => {
-        const listaLSStr = localStorage.getItem("listaPokemon")
-
-        if ((listaLSStr !== '') & (listaLSStr !== null)) {
-            const listaLSObj = JSON.parse(listaLSStr)
-            setListPokemon(listaLSObj)
-        } else {
-            console.log('listaRW')
-            setListPokemon(data.results)
-            localStorage.setItem("listaPokemon", JSON.stringify(data.results))
-        }
-
+        setListPokemon(data.results)
     }, [data])
 
     const addPokemon = (pokemonName, pokemonUrl) => {  // name, url_pokemon
@@ -61,8 +53,13 @@ const GlobalStateContext = (props) => {
         setListPokedex(newListPokedex)
     }
 
-    const states = {listPokemon, listPokedex};
-    const setters = {addPokemon, removePokemon};
+    const onChangePage = (event, value) => {
+        setPage(value)
+        console.log(value)
+    }
+
+    const states = {listPokemon, listPokedex, page};
+    const setters = {addPokemon, removePokemon, onChangePage};
     const requests = {};
 
     return (

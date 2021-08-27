@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const useRequestData = (initialValue, url) => {
     const [data, setData] = useState(initialValue);
+
     useEffect(() => {
         axios.get(url)
             .then((res) => {
