@@ -10,7 +10,17 @@ const GlobalStateContext = (props) => {
     const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=20`)
 
     useEffect(() => {
-        setListPokemon(data.results)
+        const listaLSStr = localStorage.getItem("listaPokemon")
+        
+        if ((listaLSStr !== '') & (listaLSStr !== null)) {
+            const listaLSObj = JSON.parse(listaLSStr)
+            setListPokemon(listaLSObj)
+        } else {
+            console.log('listaRW')
+            setListPokemon(data.results)
+            localStorage.setItem("listaPokemon", JSON.stringify(data.results))
+        }
+        
     }, [data])
 
     const addPokemon = (pokemonName, pokemonUrl) => {  // name, url_pokemon
@@ -45,9 +55,19 @@ const GlobalStateContext = (props) => {
         setListPokedex(newListPokedex)
     }
 
+    const AddRemovePokedex = (pokemonName) => {
+        const isListPokmon = listPokemon.filter((pokemon) => {
+            return pokemonName === pokemon.name
+        })
+        if(isListPokmon.length > 0) {
+            addPokemon(isListPokmon.name, isListPokmon.url)
+        } else {
+            removePokemon(isListPokmon.name, isListPokmon.url)
+        }
+    }
 
     const states = {listPokemon, listPokedex};
-    const setters = {addPokemon, removePokemon};
+    const setters = {addPokemon, removePokemon, AddRemovePokedex};
     const requests = {};
 
     return (
