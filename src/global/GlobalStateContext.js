@@ -7,20 +7,12 @@ import GlobalContext from "./GlobalContext";
 const GlobalStateContext = (props) => {
     const [listPokemon, setListPokemon] = useState([])  // name, url_pokemon
     const [listPokedex, setListPokedex] = useState([])  // name, url_front_default
-    const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=20`)
+    const [page, setPage] = useState(1)
+    const [data] = useRequestData({}, `${BASE_URL}?limit=20&offset=${(page - 1) * 20}`)
+
 
     useEffect(() => {
-        const listaLSStr = localStorage.getItem("listaPokemon")
-        
-        if ((listaLSStr !== '') & (listaLSStr !== null)) {
-            const listaLSObj = JSON.parse(listaLSStr)
-            setListPokemon(listaLSObj)
-        } else {
-            console.log('listaRW')
-            setListPokemon(data.results)
-            localStorage.setItem("listaPokemon", JSON.stringify(data.results))
-        }
-        
+        setListPokemon(data.results)
     }, [data])
 
     const addPokemon = (pokemonName, pokemonUrl) => {  // name, url_pokemon
@@ -32,10 +24,13 @@ const GlobalStateContext = (props) => {
         const newListPokedex = [...listPokedex, pokemon];
         setListPokedex(newListPokedex);
 
+        alert("Pokemon adicionado com sucesso!")
+
         // removendo da lista pokemon
         const newListPokemon = listPokemon.filter((item) => {
             return (item.name !== pokemon.name)
         })
+
         setListPokemon(newListPokemon)
     }
 
@@ -48,26 +43,22 @@ const GlobalStateContext = (props) => {
         const newListPokemon = [...listPokemon, pokemon];  // name, url_pokemon
         setListPokemon(newListPokemon);
 
+        alert("Pokemon removido com sucesso!")
+
         // remover da lista pokedex
         const newListPokedex = listPokedex.filter((item) => {
             return (item.name !== pokemon.name)
         })
+
         setListPokedex(newListPokedex)
     }
 
-    const AddRemovePokedex = (pokemonName) => {
-        const isListPokmon = listPokemon.filter((pokemon) => {
-            return pokemonName === pokemon.name
-        })
-        if(isListPokmon.length > 0) {
-            addPokemon(isListPokmon.name, isListPokmon.url)
-        } else {
-            removePokemon(isListPokmon.name, isListPokmon.url)
-        }
+    const onChangePage = (event, value) => {
+        setPage(value)
     }
 
-    const states = {listPokemon, listPokedex};
-    const setters = {addPokemon, removePokemon, AddRemovePokedex};
+    const states = {listPokemon, listPokedex, page};
+    const setters = {addPokemon, removePokemon, onChangePage};
     const requests = {};
 
     return (
