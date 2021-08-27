@@ -8,10 +8,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import Header from "../../components/Header/Header";
 
 //Requests
-import {goToMyPokedex} from "../../routes/coordinator";
 import {useRequestData} from "../../hooks/useRequestData";
 import {BASE_URL} from "../../constants/url";
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import GlobalContext from "../../global/GlobalContext";
 
 
@@ -41,7 +40,6 @@ const PokemonDetailsPage = () => {
     const [pokemon] = useRequestData({}, `${BASE_URL}/${params.pokemonName}`)
     const classes = useStyles();
     const {states, setters} = useContext(GlobalContext)
-    const [pokemonPokedex, setPokemonPokedex] = useState([])
 
     const stats = pokemon && pokemon.stats
     const types = pokemon && pokemon.types && pokemon.types.map((type) => {
@@ -62,19 +60,16 @@ const PokemonDetailsPage = () => {
         )
     })
 
-    const beOnPokedex = pokemon && pokemon.name && states.listPokedex.filter((poke) => {
-        if (poke.name === pokemon.name) {
-            console.log("estar na pokedex", poke)
-            // setPokemonPokedex(poke)
-
-        } else {
-            console.log("não estar na pokedex")
-        }
+    const beOnPokedex = states.listPokedex && states.listPokedex.find((poke) => {
+        return poke.name === pokemon.name;
     })
 
-    // const addButton =  <Button variant={"outlined"} color={"secondary"} onClick={() => goToMyPokedex(history)}>Adicionar na minha Pokedex</Button>
+    const notBeOnPokedex = states.listPokemon && states.listPokemon.find((poke) => {
+        return poke.name === pokemon.name;
+    })
 
-    console.log(beOnPokedex)
+    const pokemonNamePokedex = beOnPokedex && beOnPokedex.name
+
     return (
         <>
             <Header
@@ -90,30 +85,20 @@ const PokemonDetailsPage = () => {
                 }
 
                 Button2={
-                    beOnPokedex && beOnPokedex.length > 0
+                    pokemonNamePokedex === pokemon.name
                         ? <Button
                             variant={"outlined"}
                             color={"secondary"}
                             onClick={() => setters.removePokemon(beOnPokedex.name, beOnPokedex.url)}
                         >Remover da Pokedex
                         </Button>
-                        : ""
-                        // <Button
-                        //     variant={"outlined"}
-                        //     color={"secondary"}
-                        //     // onClick={() => setters.removePokemon(pokemon.name)}
-                        // >Adicionar na Pokedex
-                        // </Button>
-
-                    // <Button
-                    // variant={"outlined"}
-                    // color={"secondary"}
-                    // // onClick={() => setters.addPokemon(pokemon.name)}
-                    // >Adicionar na Pokedex
-                    // </Button>
+                        : <Button
+                            variant={"outlined"}
+                            color={"secondary"}
+                            onClick={() => setters.addPokemon(notBeOnPokedex.name, notBeOnPokedex.url)}
+                        >Adicionar na Pokedex
+                        </Button>
                 }
-
-
             />
 
             <Box className={classes.container}>

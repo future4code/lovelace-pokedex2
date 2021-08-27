@@ -22,10 +22,13 @@ const GlobalStateContext = (props) => {
         const newListPokedex = [...listPokedex, pokemon];
         setListPokedex(newListPokedex);
 
+        alert("Pokemon adicionado com sucesso!")
+
         // removendo da lista pokemon
         const newListPokemon = listPokemon.filter((item) => {
             return (item.name !== pokemon.name)
         })
+
         setListPokemon(newListPokemon)
     }
 
@@ -38,39 +41,15 @@ const GlobalStateContext = (props) => {
         const newListPokemon = [...listPokemon, pokemon];  // name, url_pokemon
         setListPokemon(newListPokemon);
 
+        alert("Pokemon removido com sucesso!")
+
         // remover da lista pokedex
         const newListPokedex = listPokedex.filter((item) => {
             return (item.name !== pokemon.name)
         })
+
         setListPokedex(newListPokedex)
     }
-
-    // const isPokedex = (pokemonName) => {
-    //     const ispokemon = listPokedex.find((pokemon) => {
-    //         if (pokemon.name === pokemonName){
-    //             setUrlPokemon(pokemon.url)
-    //             return true
-    //         } else {
-    //             return false
-    //         }
-    //     })
-    //
-    //     // console.log(ispokemon)
-    //
-    //     if (ispokemon) {
-    //         // console.log("estar a lista pokedex", ispokemon)
-    //         setbeOnPokedex(true)
-    //
-    //         // addPokemon(ispokemon.name, ispokemon.url)
-    //     } else {
-    //         // console.log("não estar a lista pokedex", ispokemon)
-    //
-    //         setbeOnPokedex(false)
-    //
-    //         // removePokemon(ispokemon.name, ispokemon.url)
-    //     }
-    // }
-
 
     const states = {listPokemon, listPokedex};
     const setters = {addPokemon, removePokemon};

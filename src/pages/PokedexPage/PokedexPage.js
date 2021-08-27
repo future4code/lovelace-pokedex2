@@ -35,7 +35,7 @@ const PokedexPage = () => {
     return (
         <>
             <Header
-                title={'Lista de Pokemon'}
+                title={'Minha Pokédex'}
                 Button1={
                     <Button
                         variant={"outlined"}
